@@ -1,18 +1,56 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
-  ScrollView,
-} from 'react-native';
-import Test from './components/Test';
-import SplashScreen from './components/SplashScreen';
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
+import LottieView from 'lottie-react-native';
+import Homescreen from "./components/Screens/HomeScreen"
+
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [splashFinished, setSplashFinished] = useState(false);
+  useEffect(() => {
+    // Simulating an async task (e.g., loading data) during splash screen
+    setTimeout(() => {
+      setSplashFinished(true);
+    }, 3000);
+  }, []);
+  if (!splashFinished) {
+    return (
+      <View style={{ flex: 1, backgroundColor: '#808080' }}>
+        <LottieView
+          source={require('./assets/splash.json')}
+          autoPlay
+          loop={false}
+          onAnimationFinish={() => {
+            setSplashFinished(true);
+          }}
+        />
+      </View>
+    );
+  }
   return (
-    <>
-      <ScrollView >
-        {/* <Test /> */}
-        <SplashScreen />
-      </ScrollView>
-    </>
 
+
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="HomeScreen" component={Homescreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
