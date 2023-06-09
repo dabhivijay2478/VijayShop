@@ -1,9 +1,16 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import ProductCard from './ProductCard';
+import Brand from './Brand';
+import NewArrival from './NewArrival';
+import Search from "./Search"
+import Cart from "../Cart/Cart"
+import Favourite from "../Favourite/Favourite"
+import Settings from '../Settings/Settings';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,6 +20,8 @@ export default function Menu() {
       screenOptions={{
         headerShown: false,
       }}
+
+
       tabBar={({ navigation, state, descriptors, insets }) => (
         <BottomNavigation.Bar
           navigationState={state}
@@ -24,13 +33,8 @@ export default function Menu() {
               canPreventDefault: true,
             });
 
-            if (event.defaultPrevented) {
-              preventDefault();
-            } else {
-              navigation.dispatch({
-                ...CommonActions.navigate(route.name, route.params),
-                target: state.key,
-              });
+            if (!event.defaultPrevented) {
+              navigation.navigate(route.name); // Navigate to the selected screen
             }
           }}
           renderIcon={({ route, focused, color }) => {
@@ -38,9 +42,9 @@ export default function Menu() {
             if (options.tabBarIcon) {
               return options.tabBarIcon({ focused, color, size: 24 });
             }
-
             return null;
           }}
+          style={styles.activetab}
           getLabelText={({ route }) => {
             const { options } = descriptors[route.key];
             const label =
@@ -64,16 +68,17 @@ export default function Menu() {
             return <Icon name="home" size={size} color={color} />;
           },
         }}
+
       />
 
 
       <Tab.Screen
-        name="Menu"
-        component={Menubar}
+        name="Fav"
+        component={Fav}
         options={{
-          tabBarLabel: 'Menu',
+          tabBarLabel: 'Fav',
           tabBarIcon: ({ color, size }) => {
-            return <Icon name="more" size={size} color={color} />;
+            return <Icon name="heart" size={size} color={color} />;
           },
         }}
       />
@@ -103,31 +108,30 @@ export default function Menu() {
 
 function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Home!</Text>
-    </View>
+    <>
+      <Search />
+      <ScrollView style={styles.container}>
+        <ProductCard />
+        <Brand />
+        <NewArrival />
+      </ScrollView >
+    </>
   );
 }
 function CartScreen() {
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Cart!</Text>
-    </View>
+    <Cart />
   );
 }
 
 function SettingsScreen() {
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Settings!</Text>
-    </View>
+    <Settings />  
   );
 }
-function Menubar() {
+function Fav() {
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Settings!</Text>
-    </View>
+    <Favourite />
   );
 }
 const styles = StyleSheet.create({
@@ -136,4 +140,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  container: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+    marginBottom: 0,
+  },
+  activetab: {
+    backgroundColor: "#95a5a6"
+  }
 });

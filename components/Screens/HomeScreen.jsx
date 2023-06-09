@@ -1,20 +1,24 @@
 import React from 'react'
-import { ScrollView } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Menu from '../Home/Menu';
-import Search from '../Home/Search';
-import ProductCard from '../Home/ProductCard';
+
 
 
 
 export default function HomeScreen() {
   return (
     <>
-      <Search />
-      <ScrollView>
-        <ProductCard />
-      </ScrollView >
-      <Menu />
+      <Menu style={styles.content} />
     </>
 
   )
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+    marginBottom: 0, // Adjust this value to give space for the bottom navigation bar
+  },
+});
