@@ -13,7 +13,6 @@ export default function Cart() {
                 <Appbar.Content title="Cart" />
 
 
-                <Appbar.Action icon="account" onPress={() => navigation.navigate('Profile')} />
             </Appbar.Header>
             <ScrollView>
                 <CartData />

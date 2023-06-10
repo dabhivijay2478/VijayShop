@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, Title, Text } from 'react-native-paper';
-import { View, StyleSheet, } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export default function CartData() {
@@ -10,6 +10,7 @@ export default function CartData() {
         { id: 1, title: 'Card 1', quantity: 1 },
         { id: 2, title: 'Card 2', quantity: 1 },
         { id: 3, title: 'Card 3', quantity: 1 },
+
     ]);
 
     const handleIncrease = (itemId) => {
@@ -40,20 +41,11 @@ export default function CartData() {
     };
 
     return (
-        <>
-            <View style={styles.totalstyle}>
-                <Text variant="headlineSmall" style={styles.subtotalText}>
-                    SubTotal: $ {calculateSubtotal()}
-                </Text>
-                <Button icon="shopping" mode="contained" onPress={() => navigation.navigate('Checkout')}>
-                    Buy Now
-                </Button>
-            </View>
-
+        <View style={styles.container}>
             {items.map((item) => (
                 <View style={styles.carouselItem} key={item.id}>
                     <Card style={styles.card}>
-                        <View style={styles.container}>
+                        <View style={styles.innerContainer}>
                             <Card.Cover
                                 source={{
                                     uri:
@@ -82,32 +74,49 @@ export default function CartData() {
                                         +
                                     </Button>
                                 </View>
-
                             </Card.Actions>
-
                         </View>
 
                         <View style={styles.contentContainer}>
-                            <Title style={styles.title}>{item.title}</Title>
-                            <Text variant="bodyMedium" style={styles.title}>
-                                Price : $ {item.quantity * 20} {/* Change the price calculation as needed */}
-                            </Text>
+                            <View style={styles.rowContainer}>
+                                <Title style={styles.title}>{item.title}</Title>
+                                <Text variant="bodyMedium" style={styles.priceText}>
+                                    Price: $ {item.quantity * 20} {/* Change the price calculation as needed */}
+                                </Text>
+                            </View>
 
-                        </View>
-                        <View>
-                            <Button icon="delete" mode="contained" onPress={() => { }}>
-                                Delete
-                            </Button>
+                            <View>
+                                <Button icon="delete" mode="contained" onPress={() => { }}>
+                                    Delete
+                                </Button>
+                            </View>
                         </View>
                     </Card>
-
                 </View>
             ))}
-        </>
+
+            <View style={styles.totalstyle}>
+                <Text variant="headlineSmall" style={styles.subtotalText}>
+                    SubTotal: $ {calculateSubtotal()}
+                </Text>
+                <Button
+                    icon="shopping"
+                    mode="contained"
+                    onPress={() => navigation.navigate('Checkout')}
+                    style={styles.buyButton}
+                    labelStyle={styles.buyButtonLabel}
+                >
+                    Buy Now
+                </Button>
+            </View>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
     carouselItem: {
         paddingHorizontal: 20,
         paddingVertical: 15,
@@ -118,7 +127,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         backgroundColor: 'black',
     },
-    container: {
+    innerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -130,27 +139,32 @@ const styles = StyleSheet.create({
         width: 100,
     },
     contentContainer: {
-        flex: 1,
-        alignSelf: 'auto',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         marginLeft: 10,
         marginBottom: 10,
     },
+    rowContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+    },
     title: {
         color: 'white',
-        alignSelf: 'flex-start',
         marginBottom: 5,
-        fontSize: 15
+        fontSize: 15,
+    },
+    priceText: {
+        color: 'white',
+        marginLeft: 10,
+        fontSize: 15,
     },
     cardActions: {
         alignItems: 'flex-end',
         display: 'flex',
         flexDirection: 'row',
         marginTop: 10,
-    },
-    button: {
-        backgroundColor: '#3498db',
     },
     buttonLabel: {
         color: 'white',
@@ -170,7 +184,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 4,
         marginRight: 2,
         marginLeft: 2,
-
     },
     quantityText: {
         fontSize: 20,
@@ -183,9 +196,22 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         paddingHorizontal: 20,
         paddingVertical: 10,
+        backgroundColor: 'slategray',
+        borderTopWidth: 1,
+        borderTopColor: 'lightgray',
+        borderRadius: 50,
+        marginEnd: 10,
+        marginStart: 10
     },
     subtotalText: {
         marginRight: 10,
+        fontSize: 16,
+        fontWeight: 'bold',
     },
-
+    buyButton: {
+        backgroundColor: '#3498db',
+    },
+    buyButtonLabel: {
+        color: 'white',
+    },
 });

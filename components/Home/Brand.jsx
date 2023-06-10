@@ -2,30 +2,28 @@ import * as React from 'react';
 import { Button, Card, Title, Paragraph, Avatar } from 'react-native-paper';
 import { View, StyleSheet, Text } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import NikeImage from '../assets/nike.png';
+import PumaImage from '../assets/puma.png';
+import ReebokImage from '../assets/reebok.png';
 
 export default function Brand() {
     const data = [
-        { id: 1, title: 'Card 1' },
-        { id: 2, title: 'Card 2' },
-        { id: 3, title: 'Card 3' },
-        { id: 4, title: 'Card 3' },
-        { id: 5, title: 'Card 3' },
-        { id: 6, title: 'Card 3' },
-        { id: 7, title: 'Card 3' },
-
-
+        { id: 1, title: 'Nike', imagesrc: NikeImage },
+        { id: 2, title: 'Puma', imagesrc: PumaImage },
+        { id: 3, title: 'reebok', imagesrc: ReebokImage },
+        // ... rest of the data
     ];
 
-    const renderItem = ({ item }) => {
+    const renderItem = ({ item, index }) => {
         return (
             <>
-
                 <View style={styles.carouselItem}>
                     <Avatar.Image
                         size={100}
-                        source={require('../assets/puma.png')}
+                        source={item.imagesrc}
                         style={styles.imageStyle}
                     />
+                    <Text style={styles.itemCode}>{item.title}</Text>
                 </View>
             </>
         );
@@ -35,7 +33,6 @@ export default function Brand() {
         <>
             <Text style={{ paddingHorizontal: 15, paddingVertical: 15, textDecorationStyle: "solid" }} >Brand</Text>
             <View style={styles.carouselContainer}>
-
                 <Carousel
                     data={data}
                     renderItem={renderItem}
@@ -58,8 +55,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 15,
         paddingBottom: 2,
+        marginLeft: 5,
+        marginRight: 5
     },
     imageStyle: {
-        borderRadius: 50, // Set to half the width and height of the image
+        borderRadius: 50,
+        height: 100,
+        width: 100,
     },
 });
