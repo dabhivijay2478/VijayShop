@@ -1,39 +1,56 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { FlatGrid } from 'react-native-super-grid';
-
+import { StyleSheet, View, FlatList } from 'react-native';
+import { Card, Text } from 'react-native-paper';
+import { IconButton, MD3Colors } from 'react-native-paper';
 export default class NewArrival extends Component {
     render() {
-        const items = [
-            { name: 'TURQUOISE', code: '#1abc9c' }, { name: 'EMERALD', code: '#2ecc71' },
-            { name: 'PETER RIVER', code: '#3498db' }, { name: 'AMETHYST', code: '#9b59b6' },
-            { name: 'WET ASPHALT', code: '#34495e' }, { name: 'GREEN SEA', code: '#16a085' },
-            { name: 'NEPHRITIS', code: '#27ae60' }, { name: 'BELIZE HOLE', code: '#2980b9' },
-            { name: 'WISTERIA', code: '#8e44ad' }, { name: 'MIDNIGHT BLUE', code: '#2c3e50' },
-            { name: 'SUN FLOWER', code: '#f1c40f' }, { name: 'CARROT', code: '#e67e22' },
-            { name: 'ALIZARIN', code: '#e74c3c' }, { name: 'CLOUDS', code: '#ecf0f1' },
-            { name: 'CONCRETE', code: '#95a5a6' }, { name: 'ORANGE', code: '#f39c12' },
-            { name: 'PUMPKIN', code: '#d35400' }, { name: 'POMEGRANATE', code: '#c0392b' },
-            { name: 'SILVER', code: '#bdc3c7' }, { name: 'ASBESTOS', code: '#7f8c8d' },
+        const products = [
+            { brand: 'nike', itemName: 'nike 1', price: 50, ratings: 4.5, imagesrc: require('../assets/nike.png') },
+            { brand: 'nike', itemName: 'nike 2', price: 50, ratings: 4.5, imagesrc: require('../assets/puma.png') },
+            { brand: 'nike', itemName: 'nike 3', price: 50, ratings: 5, imagesrc: require('../assets/nike.png') },
+            { brand: 'puma', itemName: 'puma 1', price: 50, ratings: 5, imagesrc: require('../assets/nike.png') },
+            { brand: 'puma', itemName: 'puma 2', price: 50, ratings: 5, imagesrc: require('../assets/nike.png') },
+            { brand: 'puma', itemName: 'puma 3', price: 50, ratings: 4, imagesrc: require('../assets/nike.png') },
+            { brand: 'puma', itemName: 'puma 4', price: 50, ratings: 3, imagesrc: require('../assets/nike.png') },
+            { brand: 'nike', itemName: 'nike 4', price: 50, ratings: 5, imagesrc: require('../assets/nike.png') },
+            { brand: 'nike', itemName: 'nike 5', price: 50, ratings: 4.5, imagesrc: require('../assets/nike.png') },
+            { brand: 'reebok', itemName: 'reebok 1', price: 50, ratings: 4.5, imagesrc: require('../assets/nike.png') },
         ];
 
         return (
             <>
-                <Text style={{ paddingHorizontal: 15, paddingVertical: 5, textDecorationStyle: "solid" }} >New Arrival</Text>
+                <Text style={styles.title}>New Arrival</Text>
 
-                <FlatGrid
-                    itemDimension={130}
-                    data={items}
-                    style={styles.gridView}
-                    // staticDimension={300}
-                    // fixed
-                    // spacing={20}
-                    renderItem={({ item, index }) => (
-                        <View style={[styles.itemContainer, { backgroundColor: item.code }]}>
-                            <Text style={styles.itemName}>{item.name}</Text>
-                            <Text style={styles.itemCode}>{item.code}</Text>
+                <FlatList
+                    data={products}
+                    style={styles.listview}
+                    renderItem={({ item }) => (
+                        <View style={styles.itemContainer}>
+                            <Card style={styles.card}>
+                                <Card.Content style={styles.cardContent}>
+                                    <Card.Cover source={item.imagesrc} style={styles.imageStyle} />
+                                    <View style={styles.cardContentText}>
+                                        <IconButton
+                                            icon="heart"
+                                            iconColor={MD3Colors.error50}
+                                            size={40}
+                                            onPress={() => console.log('Pressed')}
+                                            style={styles.cardTitle}
+                                        />
+                                    </View>
+                                    <View style={styles.productDetailsContainer}>
+                                        <Text style={styles.brandName}>{item.brand}</Text>
+                                        <Text style={styles.itemName}>{item.itemName}</Text>
+                                        <Text style={styles.price}>$ {item.price}</Text>
+                                        <View style={styles.priceRatingContainer}>
+                                            <Text style={styles.ratings}>Ratings: {item.ratings}</Text>
+                                        </View>
+                                    </View>
+                                </Card.Content>
+                            </Card>
                         </View>
                     )}
+                    keyExtractor={(item, index) => index.toString()}
                 />
             </>
         );
@@ -41,24 +58,83 @@ export default class NewArrival extends Component {
 }
 
 const styles = StyleSheet.create({
-    gridView: {
+    title: {
+        paddingHorizontal: 15,
+        paddingVertical: 5,
+        textDecorationStyle: 'solid',
+        marginTop: 10,
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    listview: {
         marginTop: 20,
-        flex: 1,
     },
     itemContainer: {
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 10,
+    },
+    card: {
+        width: 400,
+        elevation: 3,
         borderRadius: 5,
-        padding: 10,
-        height: 150,
+        borderColor: 'teal',
+        borderWidth: 3,
+    },
+    imageStyle: {
+        height: 200,
+        width: 200,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+        borderRadius: 5,
+        borderColor: 'steelblue',
+        borderWidth: 2,
+    },
+    cardContent: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+    },
+    cardContentText: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+    },
+    cardTitle: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'white',
+    },
+    productDetailsContainer: {
+        marginLeft: 10,
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        paddingHorizontal: 10,
+        paddingVertical: 10
+    },
+    brandName: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginBottom: 5,
     },
     itemName: {
         fontSize: 16,
-        color: '#fff',
-        fontWeight: '600',
+        marginBottom: 5,
     },
-    itemCode: {
-        fontWeight: '600',
-        fontSize: 12,
-        color: '#fff',
+    priceRatingContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        bottom: 0,
+        right: 0,
+    },
+    price: {
+        fontSize: 14,
+        color: '#888',
+    },
+    ratings: {
+        fontSize: 14,
+        color: '#888',
     },
 });

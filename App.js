@@ -10,6 +10,7 @@ import LottieView from 'lottie-react-native';
 import Homescreen from "./components/Screens/HomeScreen"
 import ProfileScreen from './components/Account/ProfileScreen';
 import Payment from './components/Account/Payment';
+import Notification from './components/Notification/Notification';
 
 
 const Stack = createNativeStackNavigator();
@@ -45,6 +46,8 @@ export default function App() {
           <Stack.Screen name="HomeScreen" component={Homescreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Checkout" component={Payment} />
+          <Stack.Screen name="Notification" component={Notification} />
+
 
 
         </Stack.Navigator>

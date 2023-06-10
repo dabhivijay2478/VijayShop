@@ -2,8 +2,12 @@ import React from 'react';
 import { View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function Search() {
+    const navigation = useNavigation();
+
     const [searchQuery, setSearchQuery] = React.useState('');
 
     const onChangeSearch = (query) => setSearchQuery(query);
@@ -24,7 +28,7 @@ export default function Search() {
                     marginRight: 10,
                 }}
             />
-            <Icon name="bell-badge" size={30} style={{ marginRight: 10, color: "slategray" }} />
+            <Icon name="bell-badge" size={30} style={{ marginRight: 10, color: "slategray" }} onPress={() => navigation.navigate('Notification')} />
         </View>
     );
 }
