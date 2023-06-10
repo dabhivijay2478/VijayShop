@@ -24,7 +24,7 @@ export default function Search() {
                     marginRight: 10,
                 }}
             />
-            <Icon name="bell" size={30} style={{ marginRight: 10, color: "blue" }} />
+            <Icon name="bell-badge" size={30} style={{ marginRight: 10, color: "slategray" }} />
         </View>
     );
 }
