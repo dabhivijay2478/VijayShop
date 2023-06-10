@@ -6,19 +6,18 @@ import CartData from './CartData';
 
 export default function Cart() {
     const navigation = useNavigation();
-
     return (
         <>
             <Appbar.Header>
                 <Appbar.BackAction onPress={() => navigation.navigate('Home')} />
                 <Appbar.Content title="Cart" />
-                <Appbar.Action icon="account" onPress={() => { }} />
+
+
+                <Appbar.Action icon="account" onPress={() => navigation.navigate('Profile')} />
             </Appbar.Header>
             <ScrollView>
-
                 <CartData />
             </ScrollView>
-
         </>
     );
 }

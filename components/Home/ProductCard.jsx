@@ -55,6 +55,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
+        paddingHorizontal: 5,
+        paddingVertical: 5,
     },
     carouselItem: {
         paddingHorizontal: 20,
@@ -62,9 +64,10 @@ const styles = StyleSheet.create({
         paddingBottom: 2,
     },
     card: {
-        paddingHorizontal: 20,
+        paddingHorizontal: 15,
         paddingVertical: 10,
         backgroundColor: "black",
+
     },
     container: {
         flexDirection: "row",

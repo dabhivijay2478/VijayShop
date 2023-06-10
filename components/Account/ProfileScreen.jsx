@@ -1,17 +1,18 @@
 import React from 'react';
+import { View, Text } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import ProfileScreen from '../Account/ProfileScreen';
 
-export default function Settings() {
+export default function ProfileScreen() {
   const navigation = useNavigation();
 
   return (
     <>
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.navigate('Home')} />
-        <Appbar.Content title="Settings" />
+        <Appbar.Content title="Profile" />
+        <Appbar.Action icon="home" onPress={() => navigation.navigate('Home')} />
       </Appbar.Header>
+
     </>
   );
 }

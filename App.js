@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StatusBar, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
@@ -8,6 +8,8 @@ import {
 } from 'react-native-safe-area-context';
 import LottieView from 'lottie-react-native';
 import Homescreen from "./components/Screens/HomeScreen"
+import ProfileScreen from './components/Account/ProfileScreen';
+import Payment from './components/Account/Payment';
 
 
 const Stack = createNativeStackNavigator();
@@ -41,6 +43,10 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="HomeScreen" component={Homescreen} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="Checkout" component={Payment} />
+
+
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
