@@ -11,6 +11,8 @@ import Homescreen from "./components/Screens/HomeScreen"
 import ProfileScreen from './components/Account/ProfileScreen';
 import Payment from './components/Account/Payment';
 import Notification from './components/Notification/Notification';
+import Loginscreen from './components/Screens/Loginscreen';
+import Signupscreen from './components/Screens/Signupscreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -25,7 +27,7 @@ export default function App() {
   }, []);
   if (!splashFinished) {
     return (
-      <View style={{ flex: 1, backgroundColor: '#808080' }}>
+      <View style={{ flex: 1, backgroundColor: 'turquoise' }}>
         <LottieView
           source={require('./assets/splash.json')}
           autoPlay
@@ -47,9 +49,8 @@ export default function App() {
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Checkout" component={Payment} />
           <Stack.Screen name="Notification" component={Notification} />
-
-
-
+          <Stack.Screen name="Login" component={Loginscreen} />
+          <Stack.Screen name="Signup" component={Signupscreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

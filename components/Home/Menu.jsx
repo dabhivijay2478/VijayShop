@@ -73,10 +73,10 @@ export default function Menu() {
 
 
       <Tab.Screen
-        name="Fav"
-        component={Fav}
+        name="Favourite"
+        component={FavouriteScreen}
         options={{
-          tabBarLabel: 'Fav',
+          tabBarLabel: 'Favourite',
           tabBarIcon: ({ color, size }) => {
             return <Icon name="heart" size={size} color={color} />;
           },
@@ -126,10 +126,10 @@ function CartScreen() {
 
 function SettingsScreen() {
   return (
-    <Settings />  
+    <Settings />
   );
 }
-function Fav() {
+function FavouriteScreen() {
   return (
     <Favourite />
   );

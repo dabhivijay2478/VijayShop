@@ -1,8 +1,11 @@
 import React from 'react';
 import { Avatar, Text, Title, Button, Divider } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Settingslist() {
+    const navigation = useNavigation();
+
     return (
         <>
 
@@ -35,6 +38,9 @@ export default function Settingslist() {
                     </View>
                     <Divider theme={{ colors: { primary: 'green' } }} bold style={{ borderColor: "slategray ", borderWidth: 1 }} />
                     <View>
+                        <Button icon="login" mode="contained" onPress={() => navigation.navigate('Login')} style={styles.buttonstyle}>
+                            Log In
+                        </Button>
                         <Button icon="logout" mode="contained" onPress={() => { }} style={styles.buttonstyle}>
                             Log Out
                         </Button>
