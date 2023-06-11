@@ -11,7 +11,7 @@ export default function ProductCard() {
 
     const renderItem = ({ item }) => {
         return (
-            <View style={styles.carouselItem}>
+            <View style={styles.carouselItem} >
                 <Card style={styles.card}>
                     <View style={styles.container}>
                         <Card.Content style={styles.contentContainer}>
@@ -38,7 +38,7 @@ export default function ProductCard() {
     };
 
     return (
-        <View style={styles.carouselContainer}>
+        <View style={styles.carouselContainer} >
             <Carousel
                 data={data}
                 renderItem={renderItem}

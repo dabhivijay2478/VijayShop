@@ -31,7 +31,10 @@ export default function Brand() {
 
     return (
         <>
-            <Text style={{ paddingHorizontal: 15, paddingVertical: 15, textDecorationStyle: "solid" }} >Brand</Text>
+            <Text style={{
+                paddingHorizontal: 15, paddingVertical: 15, textDecorationStyle: "solid", fontSize: 16,
+                fontWeight: 'bold',
+            }} >Brand</Text>
             <View style={styles.carouselContainer}>
                 <Carousel
                     data={data}

@@ -25,12 +25,13 @@ export default class NewArrival extends Component {
                     data={products}
                     style={styles.listview}
                     renderItem={({ item }) => (
-                        <View style={styles.itemContainer}>
-                            <Card style={styles.card}>
+                        <View style={styles.itemContainer} >
+                            <Card style={styles.card} >
                                 <Card.Content style={styles.cardContent}>
                                     <Card.Cover source={item.imagesrc} style={styles.imageStyle} />
                                     <View style={styles.cardContentText}>
                                         <IconButton
+                                        
                                             icon="heart"
                                             iconColor={MD3Colors.error50}
                                             size={40}
@@ -39,7 +40,7 @@ export default class NewArrival extends Component {
                                         />
                                     </View>
                                     <View style={styles.productDetailsContainer}>
-                                        <Text style={styles.brandName}>{item.brand}</Text>
+                                        <Text style={styles.brandName} >{item.brand}</Text>
                                         <Text style={styles.itemName}>{item.itemName}</Text>
                                         <Text style={styles.price}>$ {item.price}</Text>
                                         <View style={styles.priceRatingContainer}>

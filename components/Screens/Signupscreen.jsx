@@ -20,7 +20,7 @@ export default function Signupscreen() {
                     <View style={styles.cardview} >
 
                         <Card>
-                            <Card.Title title="Sign Up" subtitle="Create Your AccountD" left={LeftContent} />
+                            <Card.Title title="Sign Up" subtitle="Create Your Account" left={LeftContent} />
                             <Card.Content style={styles.cardcontentstyle} >
                                 <TextInput
                                     mode="outlined"

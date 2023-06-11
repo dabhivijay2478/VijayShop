@@ -13,6 +13,9 @@ import Payment from './components/Account/Payment';
 import Notification from './components/Notification/Notification';
 import Loginscreen from './components/Screens/Loginscreen';
 import Signupscreen from './components/Screens/Signupscreen';
+import Order from './components/Order/Order';
+import Settings from './components/Settings/Settings';
+import Produuctdetails from './components/Product/Produuctdetails';
 
 
 const Stack = createNativeStackNavigator();
@@ -29,7 +32,7 @@ export default function App() {
     return (
       <View style={{ flex: 1, backgroundColor: 'turquoise' }}>
         <LottieView
-          source={require('./assets/splash.json')}
+          source={require('./assets/shopasplash.json')}
           autoPlay
           loop={false}
           onAnimationFinish={() => {
@@ -51,6 +54,11 @@ export default function App() {
           <Stack.Screen name="Notification" component={Notification} />
           <Stack.Screen name="Login" component={Loginscreen} />
           <Stack.Screen name="Signup" component={Signupscreen} />
+          <Stack.Screen name="Order" component={Order} />
+          <Stack.Screen name="Productdetails" component={Produuctdetails} />
+
+
+
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

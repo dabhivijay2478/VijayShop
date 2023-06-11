@@ -20,19 +20,19 @@ export default function Settingslist() {
 
 
                     <View>
-                        <Button icon="account" mode="contained" onPress={() => { }} style={styles.buttonstyle} >
+                        <Button icon="account" mode="contained" onPress={() => navigation.navigate('Profile')} style={styles.buttonstyle} >
                             Profile
                         </Button>
-                        <Button icon="home" mode="contained" onPress={() => { }} style={styles.buttonstyle}>
+                        <Button icon="home" mode="contained" onPress={() => navigation.navigate('Home')} style={styles.buttonstyle}>
                             Home
                         </Button>
-                        <Button icon="heart" mode="contained" onPress={() => { }} style={styles.buttonstyle}>
+                        <Button icon="heart" mode="contained" onPress={() => navigation.navigate('Favourite')} style={styles.buttonstyle}>
                             Favourite
                         </Button>
-                        <Button icon="pencil" mode="contained" onPress={() => { }} style={styles.buttonstyle}>
+                        <Button icon="pencil" mode="contained" onPress={() => navigation.navigate('Order')} style={styles.buttonstyle}>
                             Orders
                         </Button>
-                        <Button icon="bell-badge" mode="contained" onPress={() => { }} style={styles.buttonstyle}>
+                        <Button icon="bell-badge" mode="contained" onPress={() => navigation.navigate('Notification')} style={styles.buttonstyle}>
                             Notification
                         </Button>
                     </View>
@@ -43,6 +43,9 @@ export default function Settingslist() {
                         </Button>
                         <Button icon="logout" mode="contained" onPress={() => { }} style={styles.buttonstyle}>
                             Log Out
+                        </Button>
+                        <Button icon="shopping" mode="contained" onPress={() => navigation.navigate('Productdetails')} style={styles.buttonstyle}>
+                            Product Details
                         </Button>
                     </View>
                 </View>
