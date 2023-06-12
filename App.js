@@ -15,7 +15,7 @@ import Loginscreen from './components/Screens/Loginscreen';
 import Signupscreen from './components/Screens/Signupscreen';
 import Order from './components/Order/Order';
 import Settings from './components/Settings/Settings';
-import Produuctdetails from './components/Product/Produuctdetails';
+import Productdetails from './components/Product/Productdetails';
 
 
 const Stack = createNativeStackNavigator();
@@ -55,7 +55,7 @@ export default function App() {
           <Stack.Screen name="Login" component={Loginscreen} />
           <Stack.Screen name="Signup" component={Signupscreen} />
           <Stack.Screen name="Order" component={Order} />
-          <Stack.Screen name="Productdetails" component={Produuctdetails} />
+          <Stack.Screen name="ProductDetails" component={Productdetails} />
 
 
 

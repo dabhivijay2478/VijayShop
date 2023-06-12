@@ -1,64 +1,77 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
-import { Card, Text } from 'react-native-paper';
-import { IconButton, MD3Colors } from 'react-native-paper';
-export default class NewArrival extends Component {
-    render() {
-        const products = [
-            { brand: 'nike', itemName: 'nike 1', price: 50, ratings: 4.5, imagesrc: require('../assets/nike.png') },
-            { brand: 'nike', itemName: 'nike 2', price: 50, ratings: 4.5, imagesrc: require('../assets/puma.png') },
-            { brand: 'nike', itemName: 'nike 3', price: 50, ratings: 5, imagesrc: require('../assets/nike.png') },
-            { brand: 'puma', itemName: 'puma 1', price: 50, ratings: 5, imagesrc: require('../assets/nike.png') },
-            { brand: 'puma', itemName: 'puma 2', price: 50, ratings: 5, imagesrc: require('../assets/nike.png') },
-            { brand: 'puma', itemName: 'puma 3', price: 50, ratings: 4, imagesrc: require('../assets/nike.png') },
-            { brand: 'puma', itemName: 'puma 4', price: 50, ratings: 3, imagesrc: require('../assets/nike.png') },
-            { brand: 'nike', itemName: 'nike 4', price: 50, ratings: 5, imagesrc: require('../assets/nike.png') },
-            { brand: 'nike', itemName: 'nike 5', price: 50, ratings: 4.5, imagesrc: require('../assets/nike.png') },
-            { brand: 'reebok', itemName: 'reebok 1', price: 50, ratings: 4.5, imagesrc: require('../assets/nike.png') },
-        ];
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { Card, Text, IconButton, ActivityIndicator } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
+import productsData from '../json/productsData.json';
+
+export default function NewArrival() {
+    const navigation = useNavigation();
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setProducts(productsData.fashion);
+        }, 1000);
+    }, []);
+
+    const renderProduct = ({ item }) => {
         return (
-            <>
-                <Text style={styles.title}>New Arrival</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('ProductDetails', { product: item })}>
+                <View style={styles.itemContainer}>
+                    <Card style={styles.card}>
+                        <Card.Content style={styles.cardContent}>
+                            <Card.Cover source={{ uri: item.imagesrc }} style={styles.imageStyle} />
+                            <View style={styles.cardContentText}>
+                                <IconButton
+                                    icon="heart"
+                                    iconColor="#FF0000"
+                                    size={40}
+                                    onPress={() => console.log('Pressed')}
+                                    style={styles.cardTitle}
+                                />
+                            </View>
+                            <View style={styles.productDetailsContainer}>
+                                <Text style={styles.brandName}>{item.brand}</Text>
+                                <Text style={styles.itemName}>{item.itemName}</Text>
+                                <Text style={styles.price}>$ {item.price}</Text>
+                                <View style={styles.priceRatingContainer}>
+                                    <Text style={styles.ratings}>Ratings: {item.ratings}</Text>
+                                </View>
+                            </View>
+                        </Card.Content>
+                    </Card>
+                </View>
+            </TouchableOpacity>
+        );
+    };
 
+    return (
+        <>
+            <Text style={styles.title}>New Arrival</Text>
+
+            {products.length > 0 ? (
                 <FlatList
                     data={products}
                     style={styles.listview}
-                    renderItem={({ item }) => (
-                        <View style={styles.itemContainer} >
-                            <Card style={styles.card} >
-                                <Card.Content style={styles.cardContent}>
-                                    <Card.Cover source={item.imagesrc} style={styles.imageStyle} />
-                                    <View style={styles.cardContentText}>
-                                        <IconButton
-                                        
-                                            icon="heart"
-                                            iconColor={MD3Colors.error50}
-                                            size={40}
-                                            onPress={() => console.log('Pressed')}
-                                            style={styles.cardTitle}
-                                        />
-                                    </View>
-                                    <View style={styles.productDetailsContainer}>
-                                        <Text style={styles.brandName} >{item.brand}</Text>
-                                        <Text style={styles.itemName}>{item.itemName}</Text>
-                                        <Text style={styles.price}>$ {item.price}</Text>
-                                        <View style={styles.priceRatingContainer}>
-                                            <Text style={styles.ratings}>Ratings: {item.ratings}</Text>
-                                        </View>
-                                    </View>
-                                </Card.Content>
-                            </Card>
-                        </View>
-                    )}
-                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={renderProduct}
+                    keyExtractor={(item) => item.id.toString()}
                 />
-            </>
-        );
-    }
+            ) : (
+                <View style={styles.loadingContainer}>
+                    <ActivityIndicator size="large" />
+                </View>
+            )}
+        </>
+    );
 }
 
 const styles = StyleSheet.create({
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     title: {
         paddingHorizontal: 15,
         paddingVertical: 5,
@@ -113,7 +126,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         right: 0,
         paddingHorizontal: 10,
-        paddingVertical: 10
+        paddingVertical: 10,
     },
     brandName: {
         fontSize: 14,
