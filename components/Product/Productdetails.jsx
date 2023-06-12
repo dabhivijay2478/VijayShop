@@ -90,9 +90,14 @@ export default function ProductDetails({ route }) {
                     </View>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button icon="shopping" mode="contained" onPress={() => navigation.navigate('Payment')}>
+                    <Button
+                        icon="shopping"
+                        mode="contained"
+                        onPress={() => navigation.navigate('Payment', { item: product })}
+                    >
                         Buy Now
                     </Button>
+
                 </View>
             </ScrollView>
         </>

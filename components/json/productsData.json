@@ -37,7 +37,8 @@
                     "label": "Black"
                 }
             ],
-            "description": "Product description..."
+            "description": "Product description...",
+            "ratings": 4.5
         },
         {
             "id": 2,
@@ -76,7 +77,8 @@
                     "label": "Black"
                 }
             ],
-            "description": "Product description..."
+            "description": "Product description...",
+            "ratings": 4.5
         }
     ],
     "mobiles": [
