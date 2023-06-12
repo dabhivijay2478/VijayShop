@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Title, Text } from 'react-native-paper';
+import { Button, Card, Title, Text, IconButton, MD3Colors } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -30,11 +30,11 @@ export default function Favouritelist() {
 
                             <Card.Actions style={styles.cardActions}>
                                 <View style={styles.cartContainer}>
-                                    <Button
+                                    <IconButton
                                         icon="cart"
-                                        mode="contained"
-                                        onPress={() => { }}
-                                        style={styles.cartButton}
+                                        iconColor={MD3Colors.primary100}
+                                        size={20}
+                                        onPress={() => console.log('Pressed')}
                                     />
                                 </View>
                             </Card.Actions>
@@ -49,11 +49,11 @@ export default function Favouritelist() {
                             </View>
 
                             <View style={styles.buttonContainer}>
-                                <Button
+                                <IconButton
                                     icon="heart"
-                                    mode="contained"
-                                    onPress={() => { }}
-                                    style={styles.heartButton}
+                                    iconColor={MD3Colors.primary100}
+                                    size={20}
+                                    onPress={() => console.log('Pressed')}
                                 />
                             </View>
                         </View>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     card: {
         paddingHorizontal: 20,
         paddingVertical: 10,
-        backgroundColor: 'black',
+        backgroundColor: 'slategray',
     },
     container: {
         flexDirection: 'row',

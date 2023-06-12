@@ -44,9 +44,7 @@ export default function Settingslist() {
                         <Button icon="logout" mode="contained" onPress={() => { }} style={styles.buttonstyle}>
                             Log Out
                         </Button>
-                        <Button icon="shopping" mode="contained" onPress={() => navigation.navigate('Productdetails')} style={styles.buttonstyle}>
-                            Product Details
-                        </Button>
+
                     </View>
                 </View>
             </View>

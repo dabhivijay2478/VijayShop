@@ -43,8 +43,8 @@
             "id": 2,
             "itemName": "Man Running Shoes",
             "brand": "Nike",
-            "price": 30,
-            "stock": true,
+            "price": 40,
+            "stock": false,
             "seller": "Puma",
             "imagesrc": "https://rukminim1.flixcart.com/image/850/1000/xif0q/shoe/h/u/z/-original-imaghvb5f8zkjsqe.jpeg?q=90",
             "sizeOptions": [

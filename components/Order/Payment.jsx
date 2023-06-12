@@ -8,7 +8,8 @@ export default function Payment() {
     return (
         <>
             <Appbar.Header>
-                <Appbar.Content title="Checkout" />
+
+                <Appbar.Content title="Payment" />
                 <Appbar.Action icon="home" onPress={() => navigation.navigate('Home')} />
 
             </Appbar.Header>

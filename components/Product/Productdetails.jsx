@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView, View, Image, StyleSheet } from 'react-native';
-import { Appbar, Text, Divider, Chip, ActivityIndicator } from 'react-native-paper';
+import { Appbar, Text, Divider, Chip, ActivityIndicator, Button } from 'react-native-paper';
 
 export default function ProductDetails({ route }) {
     const navigation = useNavigation();
     const { product } = route.params;
-    if (product === null) {
+
+    if (!product) {
         return (
             <View style={styles.loadingContainer}>
                 <ActivityIndicator size="large" />
@@ -15,9 +16,11 @@ export default function ProductDetails({ route }) {
     }
     return (
         <>
-
+            <Appbar.Header>
+                <Appbar.BackAction onPress={() => navigation.navigate('Home')} />
+                <Appbar.Content title="Product Details" />
+            </Appbar.Header>
             <ScrollView>
-
                 <View style={styles.imageContainer}>
                     <Image source={{ uri: product.imagesrc }} style={styles.productImage} />
                 </View>
@@ -44,31 +47,35 @@ export default function ProductDetails({ route }) {
                         <Divider bold theme={{ colors: { primary: 'green' } }} style={styles.divider} />
                         <View style={styles.productInfoContainer}>
                             <Text variant="headlineSmall">Select Size</Text>
-                            <View style={styles.chipContainer}>
-                                {product.sizeOptions.map((size) => (
-                                    <Chip key={size} mode="outlined" style={styles.chip}>
-                                        US {size}
-                                    </Chip>
-                                ))}
-                            </View>
+                            <ScrollView horizontal>
+                                <View style={styles.chipContainer}>
+                                    {product.sizeOptions.map((size) => (
+                                        <Chip key={size} mode="outlined" style={styles.chip}>
+                                            US {size}
+                                        </Chip>
+                                    ))}
+                                </View>
+                            </ScrollView>
                         </View>
                     </>
                 )}
                 <Divider bold theme={{ colors: { primary: 'green' } }} style={styles.divider} />
                 <View style={styles.productInfoContainer}>
                     <Text variant="headlineSmall">Select Color</Text>
-                    <View style={styles.chipContainer}>
-                        {product.colorOptions.map((option) => (
-                            <Chip
-                                key={option.color}
-                                mode="outlined"
-                                style={[styles.chip, { backgroundColor: option.color }]}
-                                textStyle={styles.chipText}
-                            >
-                                {option.label}
-                            </Chip>
-                        ))}
-                    </View>
+                    <ScrollView horizontal>
+                        <View style={styles.chipContainer}>
+                            {product.colorOptions.map((option) => (
+                                <Chip
+                                    key={option.color}
+                                    mode="outlined"
+                                    style={[styles.chip, { backgroundColor: option.color }]}
+                                    textStyle={styles.chipText}
+                                >
+                                    {option.label}
+                                </Chip>
+                            ))}
+                        </View>
+                    </ScrollView>
                 </View>
                 <View style={styles.productInfoContainer}>
                     <Text variant="titleLarge" style={styles.textMargin}>
@@ -82,6 +89,11 @@ export default function ProductDetails({ route }) {
                         ))}
                     </View>
                 </View>
+                <View style={styles.buttonContainer}>
+                    <Button icon="shopping" mode="contained" onPress={() => navigation.navigate('Payment')}>
+                        Buy Now
+                    </Button>
+                </View>
             </ScrollView>
         </>
     );
@@ -89,7 +101,7 @@ export default function ProductDetails({ route }) {
 
 const styles = StyleSheet.create({
     imageContainer: {
-        marginTop:50
+        marginTop: 50,
     },
     loadingContainer: {
         flex: 1,
@@ -140,5 +152,11 @@ const styles = StyleSheet.create({
     bulletText: {
         marginTop: 5,
         marginLeft: 10,
+    },
+    buttonContainer: {
+        margin: 10,
+        marginStart: 20,
+        marginEnd: 20,
+        marginBottom: 15,
     },
 });

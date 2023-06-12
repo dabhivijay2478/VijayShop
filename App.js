@@ -9,7 +9,7 @@ import {
 import LottieView from 'lottie-react-native';
 import Homescreen from "./components/Screens/HomeScreen"
 import ProfileScreen from './components/Account/ProfileScreen';
-import Payment from './components/Account/Payment';
+import Payment from './components/Order/Payment';
 import Notification from './components/Notification/Notification';
 import Loginscreen from './components/Screens/Loginscreen';
 import Signupscreen from './components/Screens/Signupscreen';
@@ -56,6 +56,8 @@ export default function App() {
           <Stack.Screen name="Signup" component={Signupscreen} />
           <Stack.Screen name="Order" component={Order} />
           <Stack.Screen name="ProductDetails" component={Productdetails} />
+          <Stack.Screen name="Payment" component={Payment} />
+
 
 
 

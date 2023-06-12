@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Title, Text } from 'react-native-paper';
+import { Button, Card, Title, Text, MD3Colors, IconButton } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -56,23 +56,26 @@ export default function CartData() {
 
                             <Card.Actions style={styles.cardActions}>
                                 <View style={styles.quantityContainer}>
-                                    <Button
+                                    <IconButton
+                                        icon="minus"
+                                        iconColor={MD3Colors.error50}
+                                        size={20}
                                         onPress={() => handleDecrease(item.id)}
                                         mode="contained"
-                                        style={styles.quantityButton}
                                         labelStyle={styles.buttonLabel}
-                                    >
-                                        -
-                                    </Button>
+                                    />
+
                                     <Text style={styles.quantityText}>{item.quantity}</Text>
-                                    <Button
+                                    <IconButton
+                                        icon="plus"
+                                        iconColor={MD3Colors.error50}
+                                        size={20}
                                         onPress={() => handleIncrease(item.id)}
                                         mode="contained"
-                                        style={styles.quantityButton}
                                         labelStyle={styles.buttonLabel}
-                                    >
-                                        +
-                                    </Button>
+                                    />
+
+
                                 </View>
                             </Card.Actions>
                         </View>
@@ -86,9 +89,13 @@ export default function CartData() {
                             </View>
 
                             <View>
-                                <Button icon="delete" mode="contained" onPress={() => { }}>
-                                    Delete
-                                </Button>
+                                <IconButton
+                                    icon="delete"
+                                    iconColor={MD3Colors.primary100}
+                                    size={20}
+
+                                />
+
                             </View>
                         </View>
                     </Card>
@@ -125,7 +132,7 @@ const styles = StyleSheet.create({
     card: {
         paddingHorizontal: 20,
         paddingVertical: 10,
-        backgroundColor: 'black',
+        backgroundColor: 'slategray',
     },
     innerContainer: {
         flexDirection: 'row',
