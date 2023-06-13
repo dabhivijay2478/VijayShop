@@ -9,7 +9,7 @@ import GooglePayImage from '../assets/google.png';
 export default function Payment({ route }) {
     const navigation = useNavigation();
     const { item } = route.params;
-    const [checked, setChecked] = useState('first');
+    const [checked, setChecked] = useState('Mastercard');
     const [quantity, setQuantity] = useState(1);
     const [Price, setPrice] = useState(item.price);
 
@@ -21,6 +21,13 @@ export default function Payment({ route }) {
         if (quantity > 1) {
             setQuantity(prevQuantity => prevQuantity - 1);
         }
+    };
+    const handleContinue = () => {
+        navigation.navigate('PaymentDetails', {
+            paymentMethod: checked,
+            productDetails: item,
+            totalPrice: quantity * Price
+        });
     };
 
     return (
@@ -88,9 +95,9 @@ export default function Payment({ route }) {
 
                             <View style={styles.checkboxContainer}>
                                 <RadioButton
-                                    value="first"
-                                    status={checked === 'first' ? 'checked' : 'unchecked'}
-                                    onPress={() => setChecked('first')}
+                                    value="Mastercard"
+                                    status={checked === 'Mastercard' ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked('Mastercard')}
                                     color="teal"
                                     style={styles.checkbox}
                                 />
@@ -108,9 +115,9 @@ export default function Payment({ route }) {
 
                             <View style={styles.checkboxContainer}>
                                 <RadioButton
-                                    value="second"
-                                    status={checked === 'second' ? 'checked' : 'unchecked'}
-                                    onPress={() => setChecked('second')}
+                                    value="Googlepay"
+                                    status={checked === 'Googlepay' ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked('Googlepay')}
                                     color="teal"
                                     style={styles.checkbox}
                                 />
@@ -118,7 +125,7 @@ export default function Payment({ route }) {
                         </View>
                     </View>
                     <View style={styles.continuecontainer}>
-                        <Chip icon="credit-card" onPress={() => console.log('Pressed')} style={styles.continuetext} textStyle={styles.continueinnertext}>continue</Chip>
+                        <Chip icon="credit-card" onPress={handleContinue} style={styles.continuetext} textStyle={styles.continueinnertext}>continue</Chip>
                     </View>
 
 
