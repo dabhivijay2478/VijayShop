@@ -21,17 +21,11 @@ export default function NewArrival() {
                 <View style={styles.itemContainer}>
                     <Card style={styles.card}>
                         <Card.Content style={styles.cardContent}>
-                            <Card.Cover source={{ uri: item.imagesrc }} style={styles.imageStyle} />
-                            <View style={styles.cardContentText}>
-                                <IconButton
-                                    icon="heart"
-                                    iconColor="#FF0000"
-                                    size={40}
-                                    onPress={() => console.log('Pressed')}
-                                    style={styles.cardTitle}
-                                />
+                            <View style={styles.imageContainer}>
+                                <Card.Cover source={{ uri: item.imagesrc }} style={styles.imageStyle} />
                             </View>
                             <View style={styles.productDetailsContainer}>
+
                                 <Text style={styles.brandName}>{item.brand}</Text>
                                 <Text style={styles.itemName}>{item.itemName}</Text>
                                 <Text style={styles.price}>$ {item.price}</Text>
@@ -40,6 +34,13 @@ export default function NewArrival() {
                                 </View>
                             </View>
                         </Card.Content>
+                        <IconButton
+                            icon="heart"
+                            color="#FF0000"
+                            size={30}
+                            onPress={() => console.log('Pressed')}
+                            style={styles.heartButton}
+                        />
                     </Card>
                 </View>
             </TouchableOpacity>
@@ -89,44 +90,41 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     card: {
-        width: 400,
+        width: '90%',
         elevation: 3,
         borderRadius: 5,
         borderColor: 'teal',
         borderWidth: 3,
     },
+    cardContent: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+    },
+    imageContainer: {
+        position: 'relative',
+    },
     imageStyle: {
-        height: 200,
-        width: 200,
+        height: 100,
+        width: 100,
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
         borderRadius: 5,
         borderColor: 'steelblue',
         borderWidth: 2,
     },
-    cardContent: {
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-    },
-    cardContentText: {
-        position: 'absolute',
-        top: 10,
-        right: 10,
-    },
-    cardTitle: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: 'white',
-    },
     productDetailsContainer: {
+        flex: 1,
         marginLeft: 10,
-        justifyContent: 'center',
-        alignItems: 'flex-end',
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
         paddingHorizontal: 10,
         paddingVertical: 10,
+    },
+    heartButton: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        alignSelf: 'flex-end',
     },
     brandName: {
         fontSize: 14,
@@ -140,8 +138,6 @@ const styles = StyleSheet.create({
     priceRatingContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        bottom: 0,
-        right: 0,
     },
     price: {
         fontSize: 14,

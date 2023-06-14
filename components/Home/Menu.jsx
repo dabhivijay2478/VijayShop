@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   activetab: {
-    backgroundColor: "#95a5a6"
+    backgroundColor: "#95a5a6",
+
   }
 });

@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import productsData from '../json/productsData.json';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
-import { Card, Text, IconButton, ActivityIndicator, Title, Paragraph, Appbar } from 'react-native-paper';
+import { Card, Text, IconButton, ActivityIndicator, Snackbar, Appbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+
+import productsData from '../json/productsData.json';
 
 export default function CatalogList({ route }) {
     const navigation = useNavigation();
     const { category } = route.params;
     const [products, setProducts] = useState([]);
     const [selectCategory, setSelectCategory] = useState(category);
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
-        const categoryProducts = productsData[category];
         setSelectCategory(category);
-
-        setTimeout(() => {
-            if (categoryProducts) {
-                setProducts(categoryProducts);
-            }
-        }, 1000);
+        setProducts(productsData[category]);
     }, [category]);
 
+    const handleAddToFavorites = () => {
+        setVisible(true);
+    };
 
     const renderProduct = ({ item }) => {
         return (
@@ -28,15 +27,8 @@ export default function CatalogList({ route }) {
                 <View style={styles.itemContainer}>
                     <Card style={styles.card}>
                         <Card.Content style={styles.cardContent}>
-                            <Card.Cover source={{ uri: item.imagesrc }} style={styles.imageStyle} />
-                            <View style={styles.cardContentText}>
-                                <IconButton
-                                    icon="heart"
-                                    color="#FF0000"
-                                    size={40}
-                                    onPress={() => console.log('Pressed')}
-                                    style={styles.cardTitle}
-                                />
+                            <View style={styles.imageContainer}>
+                                <Card.Cover source={{ uri: item.imagesrc }} style={styles.imageStyle} />
                             </View>
                             <View style={styles.productDetailsContainer}>
                                 <Text style={styles.brandName}>{item.brand}</Text>
@@ -47,6 +39,13 @@ export default function CatalogList({ route }) {
                                 </View>
                             </View>
                         </Card.Content>
+                        <IconButton
+                            icon="heart"
+                            color="#FF0000"
+                            size={30}
+                            onPress={handleAddToFavorites}
+                            style={styles.heartButton}
+                        />
                     </Card>
                 </View>
             </TouchableOpacity>
@@ -73,78 +72,95 @@ export default function CatalogList({ route }) {
                     <ActivityIndicator size="large" />
                 </View>
             )}
+            <Snackbar
+                visible={visible}
+                onDismiss={() => setVisible(false)}
+
+            >
+                Item added to favorites list!
+            </Snackbar>
         </>
     );
 }
 
 const styles = StyleSheet.create({
-    itemContainer: {
-        alignItems: 'center',
-        marginBottom: 10,
-        margin: 5
-    },
-    card: {
-        width: '80%',
-        padding: 20,
-    },
-    cardContent: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    imageStyle: {
-        width: 100,
-        height: 100,
-        borderRadius: 8,
-        marginRight: 16,
-    },
-    cardContentText: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-    },
-    cardTitle: {
-        alignSelf: 'flex-end',
-    },
-    productDetailsContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-    },
-    brandName: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 4,
-    },
-    itemName: {
-        fontSize: 14,
-        marginBottom: 4,
-    },
-    price: {
-        fontSize: 16,
-        marginBottom: 4,
-        fontWeight: 'bold',
-    },
-    priceRatingContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 4,
-    },
-    ratings: {
-        fontSize: 14,
-        marginLeft: 4,
-    },
     loadingContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
     title: {
-        fontSize: 18,
+        paddingHorizontal: 15,
+        paddingVertical: 5,
+        textDecorationStyle: 'solid',
+        marginTop: 10,
+        fontSize: 16,
         fontWeight: 'bold',
-        marginVertical: 10,
-        textAlign: 'center',
     },
     listview: {
+        marginTop: 20,
+    },
+    itemContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 10,
+    },
+    card: {
+        width: '90%',
+        elevation: 3,
+        borderRadius: 5,
+        borderColor: 'teal',
+        borderWidth: 3,
+    },
+    cardContent: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+    },
+    imageContainer: {
+        position: 'relative',
+    },
+    imageStyle: {
+        height: 100,
+        width: 100,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+        borderRadius: 5,
+        borderColor: 'steelblue',
+        borderWidth: 2,
+    },
+    productDetailsContainer: {
         flex: 1,
+        marginLeft: 10,
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+    },
+    heartButton: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        alignSelf: 'flex-end',
+    },
+    brandName: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginBottom: 5,
+    },
+    itemName: {
+        fontSize: 16,
+        marginBottom: 5,
+    },
+    priceRatingContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    price: {
+        fontSize: 14,
+        color: '#888',
+    },
+    ratings: {
+        fontSize: 14,
+        color: '#888',
     },
 });
