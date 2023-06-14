@@ -21,6 +21,13 @@ export default function CatalogList({ route }) {
         setVisible(true);
     };
 
+    const onDismissSnackBar = () => {
+        setVisible(false);
+        setTimeout(() => {
+            setVisible(false);
+        }, 2000);
+    };
+
     const renderProduct = ({ item }) => {
         return (
             <TouchableOpacity onPress={() => navigation.navigate('ProductDetails', { product: item })}>
@@ -74,8 +81,7 @@ export default function CatalogList({ route }) {
             )}
             <Snackbar
                 visible={visible}
-                onDismiss={() => setVisible(false)}
-
+                onDismiss={onDismissSnackBar}
             >
                 Item added to favorites list!
             </Snackbar>

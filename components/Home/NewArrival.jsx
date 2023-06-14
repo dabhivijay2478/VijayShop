@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
-import { Card, Text, IconButton, ActivityIndicator } from 'react-native-paper';
+import { Card, Text, IconButton, ActivityIndicator, Snackbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import productsData from '../json/productsData.json';
@@ -8,13 +8,23 @@ import productsData from '../json/productsData.json';
 export default function NewArrival() {
     const navigation = useNavigation();
     const [products, setProducts] = useState([]);
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
         setTimeout(() => {
             setProducts(productsData.fashion);
         }, 1000);
     }, []);
+    const handleAddToFavorites = () => {
+        setVisible(true);
+    };
 
+    const onDismissSnackBar = () => {
+        setVisible(false);
+        setTimeout(() => {
+            setVisible(false);
+        }, 2000);
+    };
     const renderProduct = ({ item }) => {
         return (
             <TouchableOpacity onPress={() => navigation.navigate('ProductDetails', { product: item })}>
@@ -38,7 +48,7 @@ export default function NewArrival() {
                             icon="heart"
                             color="#FF0000"
                             size={30}
-                            onPress={() => console.log('Pressed')}
+                            onPress={handleAddToFavorites}
                             style={styles.heartButton}
                         />
                     </Card>
@@ -63,6 +73,12 @@ export default function NewArrival() {
                     <ActivityIndicator size="large" />
                 </View>
             )}
+            <Snackbar
+                visible={visible}
+                onDismiss={onDismissSnackBar}
+            >
+                Item added to favorites list!
+            </Snackbar>
         </>
     );
 }
