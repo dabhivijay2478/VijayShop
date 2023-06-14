@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, ScrollView, StyleSheet, Image } from 'react-native';
-import { Appbar, Card, Text, TextInput, Divider, Button, Dialog, Portal, Provider } from 'react-native-paper';
+import { View, ScrollView, StyleSheet, Image, Modal } from 'react-native';
+import { Appbar, Card, Text, TextInput, Divider, Button, Dialog, Portal, Provider, ActivityIndicator, MD2Colors } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import MasterCardImage from '../assets/mastercard.png';
@@ -16,6 +16,7 @@ export default function PaymentDetails(props) {
     const [mode, setMode] = useState('date');
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [visible, setVisible] = useState(false);
+    const [loading, setLoading] = useState(false); // Add loading state
 
     const showDialog = () => setVisible(true);
     const hideDialog = () => setVisible(false);
@@ -29,6 +30,16 @@ export default function PaymentDetails(props) {
     const showMode = (currentMode) => {
         setShowDatePicker(true);
         setMode(currentMode);
+    };
+
+    const verifyOTP = () => {
+        setLoading(true);
+
+
+        setTimeout(() => {
+            setLoading(false);
+            navigation.navigate('Successfullorder');
+        }, 2000);
     };
 
     return (
@@ -100,28 +111,51 @@ export default function PaymentDetails(props) {
                             </View>
                         )}
                         {paymentMethod === 'Googlepay' && (
-                            <TextInput
-                                style={styles.textInput}
-                                mode="outlined"
-                                label="Enter Google Pay Number"
-                                placeholder="Your Google Pay Number"
-                                value={googlePayNumber}
-                                onChangeText={(text) => setGooglePayNumber(text)}
-                                right={<TextInput.Icon name="numeric" />}
-                            />
+                            <View>
+
+                                <TextInput
+                                    style={styles.textInput}
+                                    mode="outlined"
+                                    label="Enter Google Pay Number"
+                                    placeholder="Your Google Pay Number"
+                                    value={googlePayNumber}
+                                    onChangeText={(text) => setGooglePayNumber(text)}
+                                    right={<TextInput.Icon name="numeric" />}
+                                />
+                                <View style={styles.buttonContainer}>
+                                    <Button mode="contained" onPress={showDialog}>
+                                        Send OTP
+                                    </Button>
+                                </View>
+                            </View>
                         )}
                     </View>
                     <Portal>
                         <Dialog visible={visible} onDismiss={hideDialog}>
-                            <Dialog.Title>Alert</Dialog.Title>
+                            <Dialog.Title>Enter The OTP</Dialog.Title>
                             <Dialog.Content>
-                                <Text variant="bodyMedium">This is a simple dialog</Text>
+                                <TextInput
+                                    style={styles.textInput}
+                                    mode="outlined"
+                                    label="Enter OTP"
+                                    placeholder="OTP"
+                                    // value={googlePayNumber}
+                                    // onChangeText={(text) => setGooglePayNumber(text)}
+                                    right={<TextInput.Icon name="numeric" />}
+                                />
                             </Dialog.Content>
                             <Dialog.Actions>
-                                <Button onPress={hideDialog}>Done</Button>
+                                <Button onPress={verifyOTP}>
+                                    <Text>Verify</Text>
+                                </Button>
                             </Dialog.Actions>
                         </Dialog>
                     </Portal>
+                    <Modal visible={loading} transparent={true} onRequestClose={() => { }}>
+                        <View style={styles.loadingContainer}>
+                            <ActivityIndicator animating={true} color={MD2Colors.red800} />
+                        </View>
+                    </Modal>
                 </ScrollView>
             </>
         </Provider>
@@ -183,5 +217,11 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginTop: 10,
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
 });

@@ -4,6 +4,7 @@ import { Appbar, Avatar, Text, Card, TextInput, Button } from 'react-native-pape
 import { useNavigation } from '@react-navigation/native';
 import { Image, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import Addresslist from './Addresslist';
 export default function ProfileScreen() {
   const navigation = useNavigation();
   const [image, setImage] = useState(null);
@@ -72,33 +73,8 @@ export default function ProfileScreen() {
                     style={styles.cardinputstyle}
 
                   />
-                  <TextInput
-                    mode="outlined"
-                    label="Enter Address"
-                    placeholder="Your Address"
-                    secureTextEntry
-                    right={<TextInput.Icon icon="map-marker" />}
-                    style={styles.cardinputstyle}
+                  <Button style={styles.Addressbutton} labelStyle={styles.buttonLabel} onPress={() => navigation.navigate('Addresslist')}>Address</Button>
 
-                  />
-                  <TextInput
-                    mode="outlined"
-                    label="Enter City"
-                    placeholder="Your City"
-                    secureTextEntry
-                    right={<TextInput.Icon icon="city" />}
-                    style={styles.cardinputstyle}
-
-                  />
-                  <TextInput
-                    mode="outlined"
-                    label="Enter Pincode"
-                    placeholder="Your Pincode"
-                    secureTextEntry
-                    right={<TextInput.Icon icon="google-maps" />}
-                    style={styles.cardinputstyle}
-
-                  />
                 </Card.Content>
                 <Card.Actions style={styles.cardactionstyle} >
                   <Button style={styles.actionbutton} labelStyle={styles.buttonLabel}>Update Profile</Button>
@@ -201,4 +177,9 @@ const styles = StyleSheet.create({
     height: 200,
     marginTop: 10,
   },
+  Addressbutton: {
+    margin: 15,
+    backgroundColor: '#00fa9a',
+    color: 'white'
+  }
 })

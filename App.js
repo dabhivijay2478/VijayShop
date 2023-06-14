@@ -14,9 +14,11 @@ import Notification from './components/Notification/Notification';
 import Loginscreen from './components/Screens/Loginscreen';
 import Signupscreen from './components/Screens/Signupscreen';
 import Order from './components/Order/Order';
-import Settings from './components/Settings/Settings';
 import Productdetails from './components/Product/Productdetails';
 import Paymentdetalis from './components/Order/Paymentdetalis';
+import Successfullorder from './components/Order/Successfullorder';
+import Addresslist from './components/Account/Addresslist';
+import CatalogList from './components/Display/CatalogList';
 
 
 const Stack = createNativeStackNavigator();
@@ -59,6 +61,12 @@ export default function App() {
           <Stack.Screen name="ProductDetails" component={Productdetails} />
           <Stack.Screen name="Payment" component={Payment} />
           <Stack.Screen name="PaymentDetails" component={Paymentdetalis} />
+          <Stack.Screen name="Successfullorder" component={Successfullorder} />
+          <Stack.Screen name="Addresslist" component={Addresslist} />
+          <Stack.Screen name="CatalogList" component={CatalogList} />
+
+
+
 
 
 

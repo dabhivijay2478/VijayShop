@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ProductCard from './ProductCard';
-import Brand from './Brand';
+import Category from './Category';
 import NewArrival from './NewArrival';
 import Search from "./Search"
 import Cart from "../Cart/Cart"
@@ -112,7 +112,7 @@ function HomeScreen() {
       <Search />
       <ScrollView style={styles.container}>
         <ProductCard />
-        <Brand />
+        <Category />
         <NewArrival />
       </ScrollView >
     </>
